@@ -1,6 +1,7 @@
 #include "iostream"
 #include "stack"
 #include "queue"
+#include "iomanip"
 
 #define REP(i, n) for(int i = 0; i < n; i++)
 
@@ -18,6 +19,24 @@ struct node {
 };
 
 typedef node *link;
+
+void prettyPrint(link p, int indent=4)
+{
+    if(p != NULL) {
+        if(p->r) {
+            prettyPrint(p->r, indent+4);
+        }
+        if (indent) {
+            cout << setw(indent) << ' ';
+        }
+        if (p->r) cout<<" /\n" << setw(indent) << ' ';
+        cout<< p->data << "\n ";
+        if(p->l) {
+            cout << setw(indent) << ' ' <<" \\\n";
+            prettyPrint(p->l, indent+4);
+        }
+    }
+}
 
 void traverse(link h) {
 	if (h == NULL) return;
@@ -95,13 +114,10 @@ int main()
 	levelTraverse(root);
 	cout << '\n';
 
-	cout << countNodes(root);
+	cout << "Number of nodes : " << countNodes(root) << '\n';
+	cout << "Height of tree : " << getHeight(root) << '\n';
+	cout << "Number of leaves : " << countLeaves(root) << '\n';
 	cout << '\n';
-
-	cout << getHeight(root);
-	cout << '\n';
-
-	cout << countLeaves(root);
-	cout << '\n';
+	prettyPrint(root);
 	return 0;
 }

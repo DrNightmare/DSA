@@ -1,5 +1,6 @@
 #include "iostream"
 #include "queue"
+#include "iomanip"
 
 #define REP(i, n) for(int i = 0; i < n; i++)
 
@@ -19,6 +20,24 @@ struct node {
 
 typedef node *link;
 
+void prettyPrint(link p, int indent=4)
+{
+    if(p != NULL) {
+        if(p->r) {
+            prettyPrint(p->r, indent+4);
+        }
+        if (indent) {
+            cout << setw(indent) << ' ';
+        }
+        if (p->r) cout<<" /\n" << setw(indent) << ' ';
+        cout<< p->data << "\n ";
+        if(p->l) {
+            cout << setw(indent) << ' ' <<" \\\n";
+            prettyPrint(p->l, indent+4);
+        }
+    }
+}
+
 void insertIntoBST(link &root, int x) {
 	if (root == NULL) {root = new node(x, NULL, NULL); return;}
 	if (x == root->data) return;
@@ -26,9 +45,9 @@ void insertIntoBST(link &root, int x) {
 	else insertIntoBST(root->r, x);
 }
 
-int existsInBST(link root, int x) {
-	if (root == NULL) return 0;
-	if (x == root->data) return 1;
+bool existsInBST(link root, int x) {
+	if (root == NULL) return false;
+	if (x == root->data) return true;
 	else if (x < root->data) existsInBST(root->l, x);
 	else existsInBST(root->r, x);
 }
@@ -73,5 +92,7 @@ int main()
 	cout << '\n';
 	cout << existsInBST(root, 9);
 	cout << '\n';
+
+	prettyPrint(root);
 	return 0;
 }
