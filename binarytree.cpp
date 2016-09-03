@@ -59,6 +59,14 @@ int countNodes(link h) {
 	return 1 + countNodes(h->l) + countNodes(h->r);
 }
 
+int getHeight(link h) {
+	if (h == NULL) return -1;
+	int u = getHeight(h->l);
+	int v = getHeight(h->r);
+	if (u > v) return u + 1;
+	else return v + 1;
+}
+
 int main()
 {
 	/*
@@ -82,6 +90,9 @@ int main()
 	cout << '\n';
 
 	cout << countNodes(root);
+	cout << '\n';
+
+	cout << getHeight(root);
 	cout << '\n';
 	return 0;
 }
