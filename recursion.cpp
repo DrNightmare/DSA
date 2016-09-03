@@ -21,9 +21,9 @@ int gcd(int x, int y) {
 int computed[N];
 int rel(int x) {
 	if (x == 0) return 0;
-	if (!computed[x/2])
-		computed[x/2] = rel(x/2);
-	return (x/2) + computed[x/2];
+	if (computed[x]) return computed[x];
+	computed[x] = (x/2) + rel(x/2);
+	return computed[x];
 }
 
 int main()
