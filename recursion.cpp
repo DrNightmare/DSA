@@ -17,10 +17,20 @@ int gcd(int x, int y) {
 	return gcd(y, x % y);
 }
 
+// test function that computes f(N) = (N/2) + f(N/2) in a top down manner
+int computed[N];
+int rel(int x) {
+	if (x == 0) return 0;
+	if (!computed[x/2])
+		computed[x/2] = rel(x/2);
+	return (x/2) + computed[x/2];
+}
+
 int main()
 {
 	cout << factorial(0) << '\n';
 	cout << gcd(60, 12) << '\n';
+	cout << rel(5) << '\n';
 
 	return 0;
 }
