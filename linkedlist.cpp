@@ -81,6 +81,25 @@ int sizeOfCircularList(node *start) {
 	return count;
 }
 
+// solution to the Josephus problem
+// out of n members in a circle, eliminate every mth member
+// last person remaining is the winner
+void runJosephus(int n, int m) {
+
+	link x = initCircularList(n);
+	int i;
+
+	while(x != x->next) {
+		for(i = 1; i < m; i++) x = x->next;
+		link t = x->next;
+		x->next = t->next;
+		cout << "Eliminating : " << t->data << '\n';
+		delete t;
+	}
+
+	cout << "Winner : " << x->data << '\n';
+}
+
 int main()
 {
 	link head = createList(20);
@@ -93,6 +112,8 @@ int main()
 	printCircularList(circleStart);
 
 	cout << sizeOfCircularList(circleStart) << '\n';
+
+	runJosephus(10, 4);
 
 	return 0;
 }
