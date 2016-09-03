@@ -26,11 +26,26 @@ int rel(int x) {
 	return computed[x];
 }
 
+int computedSums[N];
+int sumTillN(int n) {
+	cout << "Called : " << n << '\n';
+	if (n == 0) return 0;
+	if (computedSums[n]) return computedSums[n];
+	computedSums[n] = n + sumTillN(n - 1);
+	return computedSums[n];
+}
+
 int main()
 {
 	cout << factorial(0) << '\n';
 	cout << gcd(60, 12) << '\n';
 	cout << rel(5) << '\n';
+
+	for(int i = 0; i < N; i++) computedSums[i] = 0;
+	cout << sumTillN(5);
+	cout << '\n';
+	cout << sumTillN(7);
+	cout << '\n';
 
 	return 0;
 }
