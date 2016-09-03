@@ -26,6 +26,13 @@ void insertIntoBST(link &root, int x) {
 	else insertIntoBST(root->r, x);
 }
 
+int existsInBST(link root, int x) {
+	if (root == NULL) return 0;
+	if (x == root->data) return 1;
+	else if (x < root->data) existsInBST(root->l, x);
+	else existsInBST(root->r, x);
+}
+
 void traverse(link h) {
 	if (h == NULL) return;
 	traverse(h->l);
@@ -63,6 +70,8 @@ int main()
 	traverse(root);
 	cout << '\n';
 	levelTraverse(root);
+	cout << '\n';
+	cout << existsInBST(root, 9);
 	cout << '\n';
 	return 0;
 }
