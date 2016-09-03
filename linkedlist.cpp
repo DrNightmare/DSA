@@ -33,10 +33,27 @@ link createList(int n) {
 	return head;	
 }
 
+link makeCopy(link start) {
+	link temp = start;
+	link head = temp;
+	link x = NULL;
+	link prev = NULL;
+	while(temp != NULL) {
+		x = new node(temp->data, NULL);
+		if (prev != NULL) prev->next = x;
+		prev = x;
+		temp = temp->next;
+	}
+	return head;
+}
+
 int main()
 {
 	link head = createList(20);
 	printList(head);
+
+	link head2 = makeCopy(head);
+	printList(head2);
 
 	return 0;
 }
