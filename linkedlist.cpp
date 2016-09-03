@@ -17,7 +17,7 @@ struct node {
 
 typedef node *link;
 
-void printList(node *start) {
+void printList(link start) {
 	link temp = start;
 	while(temp != NULL) {
 		cout << temp->data << ' ';
@@ -47,8 +47,10 @@ link makeCopy(link start) {
 	return head;
 }
 
+// returns link to last node, so use like:
+// link start = initCircularList(7)->next;
+// to get link to the first node
 link initCircularList(int n) {
-	// init circular list
 	link circularList = new node(1, NULL);
 	circularList->next = circularList;
 
@@ -57,7 +59,7 @@ link initCircularList(int n) {
 	return x;
 }
 
-void printCircularList(node *start) {
+void printCircularList(link start) {
 	link temp = start;
 	if (temp == NULL) return;
 	while(temp->next != start) {
