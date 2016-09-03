@@ -54,6 +54,11 @@ void levelTraverse(link h) {
 	}
 }
 
+int countNodes(link h) {
+	if (h == NULL) return 0;
+	return 1 + countNodes(h->l) + countNodes(h->r);
+}
+
 int main()
 {
 	/*
@@ -65,13 +70,18 @@ int main()
 	
 	*/
 	
+	// create the above tree
 	link root = new node(3, NULL, NULL);
 	root->l = new node(1, NULL, NULL);
 	root->r = new node(5, NULL, NULL);
 
 	root->l->l = new node(0, NULL, NULL);
 	root->l->r = new node(7, NULL, NULL);
+
 	levelTraverse(root);
+	cout << '\n';
+
+	cout << countNodes(root);
 	cout << '\n';
 	return 0;
 }
