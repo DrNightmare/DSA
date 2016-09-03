@@ -17,8 +17,8 @@ struct node {
 
 typedef node *link;
 
-void printList(link start) {
-	link temp = start;
+void printList(link head) {
+	link temp = head;
 	while(temp != NULL) {
 		cout << temp->data << ' ';
 		temp = temp->next;
@@ -47,6 +47,12 @@ link makeCopy(link start) {
 	return head;
 }
 
+void traverseR(link head) {
+	if (head->next != NULL) traverseR(head->next);
+	cout << head->data << ' ';
+}
+
+//----------------------------------Circular List------------------------------------
 // returns link to last node, so use like:
 // link start = initCircularList(7)->next;
 // to get link to the first node
@@ -102,17 +108,24 @@ void runJosephus(int n, int m) {
 
 int main()
 {
+	// test list
 	link head = createList(20);
 	printList(head);
 
+	// duplicate of test list
 	link head2 = makeCopy(head);
 	printList(head2);
 
+	// reverse of test list
+	traverseR(head);
+	cout << '\n';
+
+	// circular list
 	link circleStart = initCircularList(7)->next;
 	printCircularList(circleStart);
-
 	cout << sizeOfCircularList(circleStart) << '\n';
 
+	// prints solution to the Josephus problem
 	runJosephus(10, 4);
 
 	return 0;
