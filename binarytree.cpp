@@ -67,6 +67,12 @@ int getHeight(link h) {
 	else return v + 1;
 }
 
+int countLeaves(link h) {
+	if (h == NULL) return 0;
+	if (h->l == NULL && h->r == NULL) return 1;
+	return countLeaves(h->l) + countLeaves(h->r);
+}
+
 int main()
 {
 	/*
@@ -93,6 +99,9 @@ int main()
 	cout << '\n';
 
 	cout << getHeight(root);
+	cout << '\n';
+
+	cout << countLeaves(root);
 	cout << '\n';
 	return 0;
 }
