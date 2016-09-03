@@ -70,6 +70,17 @@ void printCircularList(link start) {
 	cout << '\n';
 }
 
+int sizeOfCircularList(node *start) {
+	link temp = start;
+
+	int count = 1;
+	while(temp->next != start) {
+		count++;
+		temp = temp->next;
+	}
+	return count;
+}
+
 int main()
 {
 	link head = createList(20);
@@ -80,6 +91,8 @@ int main()
 
 	link circleStart = initCircularList(7)->next;
 	printCircularList(circleStart);
+
+	cout << sizeOfCircularList(circleStart) << '\n';
 
 	return 0;
 }
