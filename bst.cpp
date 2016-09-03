@@ -21,7 +21,8 @@ typedef node *link;
 
 void insertIntoBST(link &root, int x) {
 	if (root == NULL) {root = new node(x, NULL, NULL); return;}
-	if (x < root->data) insertIntoBST(root->l, x);
+	if (x == root->data) return;
+	else if (x < root->data) insertIntoBST(root->l, x);
 	else insertIntoBST(root->r, x);
 }
 
