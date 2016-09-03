@@ -47,6 +47,27 @@ link makeCopy(link start) {
 	return head;
 }
 
+link initCircularList(int n) {
+	// init circular list
+	link circularList = new node(1, NULL);
+	circularList->next = circularList;
+
+	link x = circularList;
+	for(int i = 2; i <= n; i++) x = (x->next = new node(i, circularList));
+	return x;
+}
+
+void printCircularList(node *start) {
+	link temp = start;
+	if (temp == NULL) return;
+	while(temp->next != start) {
+		cout << temp->data << ' ';
+		temp = temp->next;
+	}
+	cout << temp->data << ' ';
+	cout << '\n';
+}
+
 int main()
 {
 	link head = createList(20);
@@ -54,6 +75,9 @@ int main()
 
 	link head2 = makeCopy(head);
 	printList(head2);
+
+	link circleStart = initCircularList(7)->next;
+	printCircularList(circleStart);
 
 	return 0;
 }
