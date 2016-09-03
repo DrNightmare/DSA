@@ -43,12 +43,12 @@ int main()
 	twoColors(arr, size);
 	printList(arr, size);
 
-	int arr2[] = {2, 1, 0, 2, 1, 0, 0, 0};
+	int arr2[] = {1, 0, 0, 0, 0, 1, 1, 2, 1, 2};
 	int size2 =  sizeof(arr2)/sizeof(arr2[0]);
 
-	printList(arr2, size);
-	threeColors(arr2, size);
-	printList(arr2, size);
+	printList(arr2, size2);
+	threeColors(arr2, size2);
+	printList(arr2, size2);
 
 	return 0;
 }
