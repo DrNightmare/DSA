@@ -1,4 +1,6 @@
 #include "iostream"
+#include "stack"
+#include "queue"
 
 #define REP(i, n) for(int i = 0; i < n; i++)
 
@@ -24,6 +26,34 @@ void traverse(link h) {
 	traverse(h->r);
 }
 
+// traverse using stack
+void traverse2(link h) {
+	if (h == NULL) return;
+	stack<link> s;
+	s.push(h);
+
+	while(!s.empty()) {
+		h = s.top();
+		cout << h->data << ' ';
+		s.pop();
+		if (h->r != NULL) s.push(h->r);
+		if (h->l != NULL) s.push(h->l);
+	}
+}
+
+void levelTraverse(link h) {
+	if (h == NULL) return;
+	queue<link> q;
+	q.push(h);
+	while(!q.empty()) {
+		h = q.front();
+		cout << h->data << ' ';
+		q.pop();
+		if (h->l != NULL) q.push(h->l);
+		if (h->r != NULL) q.push(h->r);
+	}
+}
+
 int main()
 {
 	/*
@@ -41,7 +71,7 @@ int main()
 
 	root->l->l = new node(0, NULL, NULL);
 	root->l->r = new node(7, NULL, NULL);
-	traverse(root);
+	levelTraverse(root);
 	cout << '\n';
 	return 0;
 }
