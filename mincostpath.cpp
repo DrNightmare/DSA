@@ -14,21 +14,26 @@ int min(int x, int y, int z) {
 	return min(min(x, y), z);
 }
 
+int mincostDP[R][C];
 int mincost(int arr[R][C], int m, int n) {
+	if (mincostDP[m][n] != -1) return mincostDP[m][n];
+	cout << m << " " << n << '\n';
 	if (m < 0 || n < 0) return 100;
 	if (m == 0 && n == 0) return arr[0][0];
-	return arr[m][n] + min(mincost(arr, m - 1, n), mincost(arr, m, n - 1), mincost(arr, m - 1, n - 1));
+	mincostDP[m][n] = arr[m][n] + min(mincost(arr, m - 1, n), mincost(arr, m, n - 1), mincost(arr, m - 1, n - 1));
+	return mincostDP[m][n];
 }
 
 int main()
 {
 	/*
 	1 2 3
-	4 8 7
-	1 5 3
+	4 8 10
+	1 2 3
 	*/
-	
-	int arr[R][C] = {{1, 2, 3}, {4, 8, 7}, {1, 5, 3}};
+	for(int i = 0; i < R; i++)
+		for(int j = 0; j < R; j++) mincostDP[i][j] = -1;
+	int arr[R][C] = {{1, 2, 3}, {4, 8, 10}, {1, 2, 3}};
 	cout << mincost(arr, 2, 2) << '\n';	
 	return 0;
 }
