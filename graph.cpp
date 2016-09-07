@@ -57,6 +57,11 @@ void bfs(int start) {
 	}
 }
 
+// adds edge from x to y
+void addEdge(int x, int y) {
+	adj[x].push_back(y);
+}
+
 int main()
 {
 	int nodes, edges;
@@ -66,7 +71,7 @@ int main()
 
 	for(int i = 0; i < edges; i++) {
 		cin >> x >> y;
-		adj[x].push_back(y);
+		addEdge(x, y);
 	}	
 
 	// for(int i = 0; i < nodes; i++) {
