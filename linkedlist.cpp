@@ -52,6 +52,26 @@ void traverseR(link head) {
 	cout << head->data << ' ';
 }
 
+
+// NULL <- 1 <- 2 <- 3
+// prev 3
+// curr NULL
+// temp NULL
+link reverseList(link head) {
+	link prev = NULL;
+	link curr = head;
+	link after = head->next;
+	link temp;
+
+	while(curr != NULL) {
+		temp = curr->next;
+		curr->next = prev;
+		prev = curr;
+		curr = temp;
+	}
+	return prev;
+}
+
 //----------------------------------Circular List------------------------------------
 // returns link to last node, so use like:
 // link start = initCircularList(7)->next;
@@ -119,6 +139,10 @@ int main()
 	// reverse of test list
 	traverseR(head);
 	cout << '\n';
+
+	// reverse linked list
+	link head3 = reverseList(head);
+	printList(head3);
 
 	// circular list
 	link circleStart = initCircularList(7)->next;
