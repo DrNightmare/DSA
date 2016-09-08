@@ -59,6 +59,15 @@ void traverse(link h) {
 	traverse(h->r);
 }
 
+int count = 0;
+void kthlargest(link h, int k) {
+	if (h == NULL || count >= k) return;
+	kthlargest(h->r, k);
+	count++;
+	if (count == k) cout << "kth largest = " << h->data << '\n';
+	kthlargest(h->l, k);
+}
+
 void levelTraverse(link h) {
 	if (h == NULL) return;
 	queue<link> q;
@@ -93,6 +102,8 @@ int main()
 	cout << existsInBST(root, 9);
 	cout << '\n';
 
-	prettyPrint(root);
+	// prettyPrint(root);
+	kthlargest(root, 5);
+	cout << '\n';
 	return 0;
 }
