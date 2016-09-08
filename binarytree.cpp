@@ -4,6 +4,8 @@
 #include "iomanip"
 
 #define REP(i, n) for(int i = 0; i < n; i++)
+#define MIN -100
+#define MAX 100
 
 using namespace std;
 
@@ -92,6 +94,14 @@ int countLeaves(link h) {
 	return countLeaves(h->l) + countLeaves(h->r);
 }
 
+bool isBST(link h, int min, int max) {
+	if (h == NULL) return true;
+
+	if (h->data < min || h->data > max)	return false;
+	
+	return isBST(h->l, min, h->data - 1) && isBST(h->r, h->data + 1, max); 
+}
+
 int main()
 {
 	/*
@@ -119,5 +129,7 @@ int main()
 	cout << "Number of leaves : " << countLeaves(root) << '\n';
 	cout << '\n';
 	prettyPrint(root);
+
+	cout << isBST(root, MIN, MAX) << '\n';
 	return 0;
 }
