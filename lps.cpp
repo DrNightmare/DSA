@@ -9,7 +9,7 @@ using namespace std;
 
 int dp[START][END];
 int lps(string x, int start, int end) {
-	if (start < 0 || end > x.size() || start > end) return 0;
+	if (start < 0 || start > end) return 0;
 	if (start == end) return 1;
 	if (dp[start][end] != -1) return dp[start][end];
 
