@@ -2,6 +2,7 @@
 #include "stack"
 #include "queue"
 #include "iomanip"
+#include "cstdlib"
 
 #define REP(i, n) for(int i = 0; i < n; i++)
 #define MIN -100
@@ -102,6 +103,26 @@ bool isBST(link h, int min, int max) {
 	return isBST(h->l, min, h->data - 1) && isBST(h->r, h->data + 1, max); 
 }
 
+// selects random node from the tree using reservoir sampling
+link selectRandomNode(link h) {
+	int nodeCount = 1;
+	link selected = NULL;
+	if (h == NULL) return h;
+	stack<link> s;
+	s.push(h);
+
+	while(!s.empty()) {
+		h = s.top();
+		if (rand() % nodeCount == nodeCount - 1) selected = h;
+		nodeCount++;
+		s.pop();
+		if (h->r != NULL) s.push(h->r);
+		if (h->l != NULL) s.push(h->l);
+	}
+
+	return selected;
+}
+
 int main()
 {
 	/*
@@ -131,5 +152,9 @@ int main()
 	prettyPrint(root);
 
 	cout << isBST(root, MIN, MAX) << '\n';
+
+	// generate random seed
+	srand(time(0));
+	cout << selectRandomNode(root)->data << '\n';
 	return 0;
 }
